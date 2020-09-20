@@ -1,10 +1,14 @@
-package pl.coderslab.dtapp.model;
+package pl.coderslab.dtapp.model.entities;
 
+
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
+@Getter @Setter @ToString @EqualsAndHashCode(of = "id")
+@NoArgsConstructor @AllArgsConstructor
 public class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
