@@ -14,7 +14,6 @@ import pl.coderslab.dtapp.dto.RegistrationTechnicianDTO;
 import pl.coderslab.dtapp.services.TechnicianService;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -42,7 +41,8 @@ public class TechnicianServiceImpl implements TechnicianService {
 
     }
 
-    public List<LaboratoryDTO> getUserLaboratories(User user) {
-        return laboratoryRepository.findLaboratoriesByTechnician(user);
+    public LaboratoryDTO getUserLaboratory(User user) {
+        LaboratoryDTO laboratoryDTO = modelMapper.map(laboratoryRepository.findLaboratoryByTechnician(user), LaboratoryDTO.class);
+        return laboratoryDTO;
     }
 }

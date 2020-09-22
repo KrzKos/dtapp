@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/u/**").hasRole("SUPER_TECH")
+                .antMatchers("/u/**").hasAuthority("SUPER_TECH")
                 .antMatchers("/about").authenticated()
                 .and().formLogin().loginPage("/login").usernameParameter("email")
                 .and().logout().logoutSuccessUrl("/");

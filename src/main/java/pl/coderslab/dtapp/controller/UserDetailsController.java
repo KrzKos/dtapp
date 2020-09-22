@@ -20,10 +20,9 @@ public class UserDetailsController {
     private final UserService userService;
 
     @GetMapping
-    @ResponseBody
     public String showTechnicianDetails(Principal principal){
         User user = userService.findByUserEmail(principal.getName());
 
-        return technicianService.getUserLaboratories(user).toString();
+        return "user/details";
     }
 }
