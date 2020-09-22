@@ -1,4 +1,4 @@
-package pl.coderslab.dtapp.model.entities;
+package pl.coderslab.dtapp.domain.entities;
 
 
 import lombok.*;

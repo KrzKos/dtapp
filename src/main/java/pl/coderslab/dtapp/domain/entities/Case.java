@@ -1,12 +1,6 @@
-package pl.coderslab.dtapp.model.entities;
+package pl.coderslab.dtapp.domain.entities;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-import javax.persistence.*;
-import java.time.LocalDateTime;
-
+/*
 @Getter @Setter @ToString
 @Entity
 @Table(name = "cases")
@@ -26,3 +20,4 @@ public class Case extends BaseEntity {
     @JoinColumn(name = "technician_id")
     private User creator;
 }
+*/

@@ -1,14 +1,15 @@
-package pl.coderslab.dtapp.model.entities;
+package pl.coderslab.dtapp.domain.entities;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter @Setter @ToString(exclude = "password")
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User extends BaseEntity{
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -23,8 +24,5 @@ public class User extends BaseEntity{
     private String role;
     @Column(nullable = false)
     private boolean active = false;
-
-
-
 
 }

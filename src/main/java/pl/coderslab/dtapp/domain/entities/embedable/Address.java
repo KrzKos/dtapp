@@ -1,4 +1,4 @@
-package pl.coderslab.dtapp.model.entities.embedable;
+package pl.coderslab.dtapp.domain.entities.embedable;
 
 import lombok.Data;
 
@@ -10,7 +10,7 @@ public class Address {
 
     private String street;
     private String streetNumber;
-    private String buildingNumber;
+    private String localNumber;
     private String postCode;
     private String city;
     private String country;
