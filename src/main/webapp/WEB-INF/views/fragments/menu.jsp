@@ -1,5 +1,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="">
@@ -48,7 +49,7 @@
             <div class="navbar-item">
                 <div class="buttons">
                     <a href="/register" class="button is-primary">
-                        <strong>Sign up</strong>
+                        <strong><spring:message code="button.signin"/></strong>
                     </a>
                     <a href="/login" class="button is-light">
                         Log in
@@ -63,7 +64,7 @@
                 <div class="buttons">
 
                         <form action="<c:url value="/logout"/>" method="post">
-                            <input class="button is-primary" type="submit" value="Wyloguj">
+                            <input class="button is-primary" type="submit" value="<spring:message code="button.logout"/>">
                             <sec:csrfInput/>
                         </form>
                 </div>

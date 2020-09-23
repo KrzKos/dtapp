@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -17,7 +18,7 @@
             <a href="#" class="button is-round is-primary"><span class="icon is-large">
           <i class="fas fa-plus-circle" title="W trakcie"></i>
         </span>
-                <span>Dodaj</span>
+                <span><spring:message code="button.add"/></span>
             </a>
         </div>
     </div>
@@ -26,10 +27,10 @@
             <thead>
             <tr>
                 <th>Id</th>
-                <th>Imie i nazwisko pacjenta</th>
-                <th>Data przyjęcia pracy</th>
-                <th>Termin oddania</th>
-                <th>Status</th>
+                <th><spring:message code="app.patientFullName" /></th>
+                <th><spring:message code="app.caseRecivedTime"/></th>
+                <th><spring:message code="app.caseDeadline"/> </th>
+                <th><spring:message code="app.status"/></th>
             </tr>
             </thead>
             <tbody>
@@ -40,7 +41,7 @@
                 <td>${case.orderTime}</td>
                 <td>${case.deadline}</td>
                 <td><a href="#" class="button is-small is-info"><span class="icon is-small is-left">
-            <i class="fas fa-flag" title="W trakcie"></i>
+            <i class="fas fa-flag" title="<spring:message code="status.active" />"></i>
           </span></a></td>
             </tr>
             </c:forEach>
