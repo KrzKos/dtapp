@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/u/**").hasAuthority("SUPER_TECH")
                 .antMatchers("/about").authenticated()
                 .and().formLogin().loginPage("/login").usernameParameter("email").defaultSuccessUrl("/u/cases")
-                .and().logout().logoutSuccessUrl("/");
+                .and().logout().logoutSuccessUrl("/login");
     }
 
     @Override

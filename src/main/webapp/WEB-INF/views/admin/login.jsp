@@ -1,8 +1,8 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
@@ -10,20 +10,43 @@
     <title>Title</title>
 </head>
 <body>
-<c:if test="${param['error'] != null}">
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        Błędne dane logowania!
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+<header>
+    <div class="block">
+        <section class="hero is-primary">
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title">Logowanie</h1>
+                </div>
+            </div>
+        </section>
     </div>
-</c:if>
-<form method="post">
-    <div><label><spring:message code="app.username"/>: <input type="text" name="email"/> </label></div>
-    <div><label><spring:message code="app.password"/>: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="<spring:message code="button.signin">"/></div>
-    <sec:csrfInput/>
+</header>
+<section class="section">
+<div class="columns">
+    <div class="column">
 
-</form>
+    </div>
+    <div class="column">
+    <c:if test="${param['error'] != null}">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            Błędne dane logowania!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </c:if>
+    <form:form method="post">
+        <div class="field"><label class="label"><spring:message code="app.username"/>: <input type="text" class="input" name="email"/> </label></div>
+        <div class="field"><label class="label"><spring:message code="app.password"/>: <input type="password" class="input" name="password"/> </label></div>
+        <div><input type="submit" class="button is-info" value="<spring:message code="button.login" />"/></div>
+        <sec:csrfInput/>
+
+    </form:form>
+    </div>
+    <div class="column">
+
+    </div>
+</div>
+</section>
 </body>
 </html>
