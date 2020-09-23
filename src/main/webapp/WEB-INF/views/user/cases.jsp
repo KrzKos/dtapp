@@ -26,20 +26,24 @@
         <table class="table is-striped is-narrow is-hoverable is-fullwidth is-bordered">
             <thead>
             <tr>
-                <th>Id</th>
+                <th>Lp.</th>
                 <th><spring:message code="app.patientFullName" /></th>
                 <th><spring:message code="app.caseRecivedTime"/></th>
                 <th><spring:message code="app.caseDeadline"/> </th>
+                <th><spring:message code="app.caseTechnician"/> </th>
+
                 <th><spring:message code="app.status"/></th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${cases}" var="case">
+            <c:forEach items="${cases}" var="case" varStatus="lp">
             <tr>
-                <td>${case.id}</td>
+                <td>${lp.index + 1}</td>
                 <td>${case.patientName}</td>
                 <td>${case.orderTime}</td>
                 <td>${case.deadline}</td>
+                <td>${case.technicianFullName}</td>
+
                 <td><a href="#" class="button is-small is-info"><span class="icon is-small is-left">
             <i class="fas fa-flag" title="<spring:message code="status.active" />"></i>
           </span></a></td>

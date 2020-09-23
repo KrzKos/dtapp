@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.dtapp.domain.entities.Cases;
 import pl.coderslab.dtapp.domain.entities.User;
+import pl.coderslab.dtapp.dto.CasesDTO;
 import pl.coderslab.dtapp.services.CasesService;
 import pl.coderslab.dtapp.services.UserService;
 
@@ -23,7 +24,7 @@ public class CasesController {
     @GetMapping
     public String getAllCases(Model model, Principal principal){
         User technician = userService.findByUserEmail(principal.getName());
-        List<Cases> cases = casesService.findCasesByTechnicianOrderByCreatedOnDesc(technician);
+        List<CasesDTO> cases = casesService.findCasesByTechnicianOrderByCreatedOnDesc(technician);
         model.addAttribute("cases", cases);
         return "user/cases";
     }
