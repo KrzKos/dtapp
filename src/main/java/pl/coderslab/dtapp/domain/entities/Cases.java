@@ -34,4 +34,6 @@ public class Cases extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "technician_id")
     private User technician;
+    @ManyToOne
+    private Laboratory laboratory;
 }

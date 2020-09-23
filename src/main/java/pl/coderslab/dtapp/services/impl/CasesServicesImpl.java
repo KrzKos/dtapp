@@ -2,8 +2,10 @@ package pl.coderslab.dtapp.services.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import pl.coderslab.dtapp.domain.entities.Cases;
+import pl.coderslab.dtapp.domain.entities.Laboratory;
 import pl.coderslab.dtapp.domain.entities.User;
 import pl.coderslab.dtapp.domain.repositories.CaseRepository;
 import pl.coderslab.dtapp.dto.CasesDTO;
@@ -27,4 +29,15 @@ public class CasesServicesImpl implements CasesService {
                 .collect(Collectors.toList());
         return casesDTOS;
     }
+
+    @Override
+    @Secured("SUPER_TECH")
+    public List<CasesDTO> findCasesByLaboratory(Laboratory laboratory) {
+        List<Cases> cases = caseRepository.findCasesByLaboratory(laboratory);
+        List<CasesDTO> casesDTOS = cases.stream()
+                .map(c -> modelMapper.map(c,CasesDTO.class))
+                .collect(Collectors.toList());
+        return casesDTOS;
+    }
+
 }

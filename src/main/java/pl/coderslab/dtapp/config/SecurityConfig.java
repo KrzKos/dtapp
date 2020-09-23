@@ -20,8 +20,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/u/**").hasAuthority("SUPER_TECH")
-                .antMatchers("/about").authenticated()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/register").permitAll()
+                .antMatchers("/u/**").hasAnyAuthority("SUPER_TECH", "TECH")
                 .and().formLogin().loginPage("/login").usernameParameter("email").defaultSuccessUrl("/u/cases")
                 .and().logout().logoutSuccessUrl("/login");
     }
