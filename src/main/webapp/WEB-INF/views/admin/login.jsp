@@ -28,15 +28,12 @@
     </div>
     <div class="column">
     <c:if test="${param['error'] != null}">
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <div class="notification is-danger">
             Błędne dane logowania!
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
         </div>
     </c:if>
     <form:form method="post">
-        <div class="field"><label class="label"><spring:message code="app.username"/>: <input type="text" class="input" name="email"/> </label></div>
+        <div class="field"><label class="label"><spring:message code="app.username"/>: <input type="text" class="input" name="email" placeholder="<spring:message code="form.yourEmail"/> "/> </label></div>
         <div class="field"><label class="label"><spring:message code="app.password"/>: <input type="password" class="input" name="password"/> </label></div>
         <div><input type="submit" class="button is-info" value="<spring:message code="button.login" />"/></div>
         <sec:csrfInput/>

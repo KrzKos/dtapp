@@ -8,4 +8,6 @@ import pl.coderslab.dtapp.domain.entities.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByEmail(String email);
+    // do testów
+    boolean existsByFirstName(String firstName);
 }
