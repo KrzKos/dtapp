@@ -1,4 +1,4 @@
-package pl.coderslab.dtapp.dto;
+package pl.coderslab.dtapp.dto.cases;
 
 import lombok.Data;
 import pl.coderslab.dtapp.domain.entities.User;

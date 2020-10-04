@@ -17,4 +17,5 @@ public interface CaseRepository extends JpaRepository<Cases, Long> {
     List<Cases> findCasesByTechnicianAndLaboratory(User technician, Laboratory laboratory);
 
     List<Cases> findCasesByLaboratory(Laboratory laboratory);
+
 }

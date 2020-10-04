@@ -23,6 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/register").permitAll()
                 .antMatchers("/u/**").hasAnyAuthority("SUPER_TECH", "TECH")
+                .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").usernameParameter("email").defaultSuccessUrl("/u/cases")
                 .and().logout().logoutSuccessUrl("/login");
     }

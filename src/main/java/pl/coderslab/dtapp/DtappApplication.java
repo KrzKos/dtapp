@@ -11,6 +11,7 @@ public class DtappApplication {
     public static void main(String[] args) {
         SpringApplication.run(DtappApplication.class, args);
     }
+
     @Bean
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
