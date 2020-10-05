@@ -1,24 +1,23 @@
 package pl.coderslab.dtapp.dto.cases;
 
 import lombok.Data;
-import pl.coderslab.dtapp.dto.dentist.DentistNameDTO;
-import pl.coderslab.dtapp.dto.technician.TechnicianNameDTO;
-
-import java.time.LocalDateTime;
-import java.util.List;
+import org.springframework.format.annotation.DateTimeFormat;
+import java.time.LocalDate;
 
 @Data
 public class CasesFormDTO {
 
     private String patientName;
-    private LocalDateTime deadline;
-    private LocalDateTime finishTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate deadline;
+    private LocalDate finishTime;
     private String toothNumber;
     private String toothColor;
-    private String prostheticType;
+    private String toothProstheticType;
     private String note;
-    private List<DentistNameDTO> dentist;
-    private List<TechnicianNameDTO> technician;
+   // private List<DentistNameDTO> dentist;
+    private long technicianId;
+    //private long laboratoryId;
 
 
 }

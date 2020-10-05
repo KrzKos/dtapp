@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +21,10 @@ public class Cases extends BaseEntity {
     private String patientName;
     @Column(name = "order_time")
     private LocalDateTime orderTime;
-    private LocalDateTime deadline;
+    private LocalDate deadline;
     @Column(name = "finish_time")
     private LocalDateTime finishTime;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Tooth> teeth;
     private String note;
     @OneToMany

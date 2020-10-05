@@ -4,9 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.dtapp.domain.entities.Cases;
 import pl.coderslab.dtapp.dto.cases.CasesFormDTO;
-import pl.coderslab.dtapp.dto.dentist.DentistNameDTO;
 import pl.coderslab.dtapp.dto.technician.TechnicianNameDTO;
 import pl.coderslab.dtapp.services.CasesService;
 import pl.coderslab.dtapp.services.UserService;
@@ -36,8 +34,8 @@ public class AddCaseController {
        return "cases/addForm"; 
     }
     @PostMapping
-    @ResponseBody
-    public String addCase(@ModelAttribute("newCase") Cases cases) {
-        return "Dodano pracę";
+    public String addCase(@ModelAttribute("newCase") CasesFormDTO casesFormDTO) {
+        casesService.create(casesFormDTO);
+        return "redirect:/u/cases";
     }
 }

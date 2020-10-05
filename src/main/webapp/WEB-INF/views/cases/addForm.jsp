@@ -16,7 +16,7 @@
 <form:form modelAttribute="newCase" method="post">
     <spring:message code="app.patient"/> <form:input path="patientName"/><br>
     <spring:message code="app.caseTechnician"/>
-<form:select path="technician" multiple="false">
+<form:select path="technicianId" multiple="false">
     <form:option value="0" label=" "/>
     <form:options items="${technicians}" itemValue="id" itemLabel="fullName"/>
 </form:select><br>
@@ -25,7 +25,7 @@
     <spring:message code="app.toothColor"/> <form:input path="toothColor"/><br>
     <spring:message code="app.note"/>
     <form:textarea path="note" cols="10" rows="5"/><br>
-<input type="submit" value="<spring:message code="button.save"/>
+<input type="submit" value="<spring:message code="button.save"/>"/>
 
 </form:form>
 </body>

@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pl.coderslab.dtapp.domain.entities.Tooth;
 
 @Repository
-public interface TootRepository extends JpaRepository<Tooth, Long> {
+public interface ToothRepository extends JpaRepository<Tooth, Long> {
 }
