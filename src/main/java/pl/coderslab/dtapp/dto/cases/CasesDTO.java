@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Data
 public class CasesDTO {
 
-
+    private Long id;
     private String patientName;
     private LocalDateTime orderTime;
     private LocalDate deadline;

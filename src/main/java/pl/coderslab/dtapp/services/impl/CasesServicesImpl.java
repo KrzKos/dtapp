@@ -1,5 +1,6 @@
 package pl.coderslab.dtapp.services.impl;
 
+import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -14,6 +15,7 @@ import pl.coderslab.dtapp.domain.repositories.LaboratoryRepository;
 import pl.coderslab.dtapp.domain.repositories.ToothRepository;
 import pl.coderslab.dtapp.domain.repositories.UserRepository;
 import pl.coderslab.dtapp.dto.cases.CasesDTO;
+import pl.coderslab.dtapp.dto.cases.CasesEditFormDTO;
 import pl.coderslab.dtapp.dto.cases.CasesFormDTO;
 import pl.coderslab.dtapp.services.CasesService;
 
@@ -45,12 +47,29 @@ public class CasesServicesImpl implements CasesService {
     public List<CasesDTO> findCasesByLaboratory(Laboratory laboratory) {
         List<Cases> cases = caseRepository.findCasesByLaboratory(laboratory);
         List<CasesDTO> casesDTOS = cases.stream()
-                .map(c -> modelMapper.map(c,CasesDTO.class))
+                .map(c -> modelMapper.map(c, CasesDTO.class))
                 .collect(Collectors.toList());
         return casesDTOS;
 
     }
 
+    @Override
+    public CasesEditFormDTO findCaseById(Long id) throws NotFoundException {
+        User technician = userRepository.findByEmail(authentication.getAuthentication().getName());
+        Cases cases = caseRepository.findByIdAndTechnician(id, technician);
+
+        if (cases == null) {
+            throw new NotFoundException("Nie znaleziono zlecenia");
+        }
+        CasesEditFormDTO caseToEdit = modelMapper.map(cases, CasesEditFormDTO.class);
+        cases.getTeeth().stream()
+                .forEach(t -> {
+                    caseToEdit.setToothNumber(t.getNumber());
+                    caseToEdit.setToothColor(t.getColor());
+                    caseToEdit.setToothProstheticType(t.getProstheticType());
+                });
+        return caseToEdit;
+    }
 
 
     @Override
@@ -69,16 +88,40 @@ public class CasesServicesImpl implements CasesService {
         cases.setDeadline(casesFormDTO.getDeadline());
 
         Optional<User> technician = userRepository.findById(casesFormDTO.getTechnicianId());
-        if(technician.isPresent()){
+        if (technician.isPresent()) {
             cases.setTechnician(technician.get());
         }
         Optional<Laboratory> lab = laboratoryRepository.findById(labId);
-        if(lab.isPresent()) {
+        if (lab.isPresent()) {
             cases.setLaboratory(lab.get());
         }
         cases.setId(null);
         caseRepository.save(cases);
 
+
+    }
+
+    @Override
+    public void update(CasesEditFormDTO casesEditFormDTO) throws NotFoundException {
+        User technician = userRepository.findByEmail(authentication.getAuthentication().getName());
+
+        Cases caseToEdit = caseRepository.findByIdAndTechnician(casesEditFormDTO.getId(), technician);
+        if (caseToEdit == null) {
+            throw new NotFoundException("Nie znaleziono zlecenia do edycji");
+        }
+        Optional<User> casesTechnician = userRepository.findById(casesEditFormDTO.getTechnicianId());
+        casesTechnician.ifPresent(caseToEdit::setTechnician);
+        caseToEdit.setDeadline(casesEditFormDTO.getDeadline());
+        caseToEdit.setPatientName(casesEditFormDTO.getPatientName());
+        List<Tooth> toothList = new ArrayList<>();
+        Tooth tooth = new Tooth();
+        tooth.setNumber(casesEditFormDTO.getToothNumber());
+        tooth.setColor(casesEditFormDTO.getToothColor());
+        tooth.setProstheticType(casesEditFormDTO.getToothProstheticType());
+        toothList.add(tooth);
+        caseToEdit.setTeeth(toothList);
+        caseToEdit.setNote(casesEditFormDTO.getNote());
+        caseRepository.save(caseToEdit);
 
     }
 

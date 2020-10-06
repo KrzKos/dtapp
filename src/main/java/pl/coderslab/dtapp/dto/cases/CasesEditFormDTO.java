@@ -8,7 +8,8 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Data
-public class CasesFormDTO {
+public class CasesEditFormDTO {
+    private Long id;
     @NotBlank
     private String patientName;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -20,6 +21,4 @@ public class CasesFormDTO {
     private String toothProstheticType;
     private String note;
     private long technicianId;
-
-
 }

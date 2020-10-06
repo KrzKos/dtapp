@@ -15,7 +15,7 @@
         <div class="column is-half">
         </div>
         <div class="column" align="right">
-            <a href="#" class="button is-round is-primary"><span class="icon is-large">
+            <a href="/u/cases/add" class="button is-round is-primary"><span class="icon is-large">
           <i class="fas fa-plus-circle" title="W trakcie"></i>
         </span>
                 <span><spring:message code="button.add"/></span>
@@ -27,27 +27,36 @@
             <thead>
             <tr>
                 <th>Lp.</th>
-                <th><spring:message code="app.patientFullName" /></th>
+                <th><spring:message code="app.patientFullName"/></th>
                 <th><spring:message code="app.caseReceivedTime"/></th>
-                <th><spring:message code="app.caseDeadline"/> </th>
-                <th><spring:message code="app.caseTechnician"/> </th>
+                <th><spring:message code="app.caseDeadline"/></th>
+                <th><spring:message code="app.caseTechnician"/></th>
 
                 <th><spring:message code="app.status"/></th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${cases}" var="case" varStatus="lp">
-            <tr>
-                <td>${lp.index + 1}</td>
-                <td>${case.patientName}</td>
-                <td>${case.orderTime}</td>
-                <td>${case.deadline}</td>
-                <td>${case.technicianFullName}</td>
+                <tr>
+                    <td>${lp.index + 1}</td>
+                    <td>${case.patientName}</td>
+                    <td>${case.orderTime}</td>
+                    <td>${case.deadline}</td>
+                    <td>${case.technicianFullName}</td>
 
-                <td><a href="#" class="button is-small is-info"><span class="icon is-small is-left">
-            <i class="fas fa-flag" title="<spring:message code="status.active" />"></i>
-          </span></a></td>
-            </tr>
+                    <td>
+                        <a href="#" class="button is-small is-info">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-flag" title="<spring:message code="status.active" />"></i>
+                            </span>
+                        </a>
+                        <a href="/u/cases/detail/${case.id}" class="button is-small is-info">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-flag" title="<spring:message code="status.active" />"></i>
+                            </span>
+                        </a>
+                    </td>
+                </tr>
             </c:forEach>
             </tbody>
         </table>
