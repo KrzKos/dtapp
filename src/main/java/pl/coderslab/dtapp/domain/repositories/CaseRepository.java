@@ -18,4 +18,6 @@ public interface CaseRepository extends JpaRepository<Cases, Long> {
 
     List<Cases> findCasesByLaboratory(Laboratory laboratory);
 
+
+
 }

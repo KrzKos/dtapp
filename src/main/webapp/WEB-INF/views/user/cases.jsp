@@ -28,7 +28,7 @@
             <tr>
                 <th>Lp.</th>
                 <th><spring:message code="app.patientFullName" /></th>
-                <th><spring:message code="app.caseRecivedTime"/></th>
+                <th><spring:message code="app.caseReceivedTime"/></th>
                 <th><spring:message code="app.caseDeadline"/> </th>
                 <th><spring:message code="app.caseTechnician"/> </th>
 

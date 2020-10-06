@@ -49,7 +49,7 @@
             <div class="navbar-item">
                 <div class="buttons">
                     <a href="/register" class="button is-primary">
-                        <strong><spring:message code="button.signin"/></strong>
+                        <strong><spring:message code="button.signIn"/></strong>
                     </a>
                     <a href="/login" class="button is-light">
                         Log in
