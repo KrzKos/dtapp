@@ -59,6 +59,7 @@
                 <div class="control">
                     <form:input cssClass="input" path="toothColor"/>
                 </div>
+                <form:errors path="toothColor"/>
             </div>
 
             <div class="field">
@@ -66,6 +67,7 @@
                 <div class="control">
                     <form:input cssClass="input" path="toothProstheticType"/>
                 </div>
+                <form:errors path="toothProstheticType"/>
             </div>
             <div class="field">
                 <label class="label"></label>

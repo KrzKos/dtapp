@@ -60,11 +60,10 @@
         <sec:authorize access="isAuthenticated()">
         <div class="navbar-end">
             <div class="navbar-item">
-                <p>Witaj, XXXXXXX</p>
-                <div class="buttons">
-
+                <p>Witaj, <sec:authentication property="name"/></p>
+                <div class="control">
                         <form action="<c:url value="/logout"/>" method="post">
-                            <input class="button is-primary" type="submit" value="<spring:message code="button.logout"/>">
+                            <button class="button is-primary"><spring:message code="button.logout"/></button>
                             <sec:csrfInput/>
                         </form>
                 </div>

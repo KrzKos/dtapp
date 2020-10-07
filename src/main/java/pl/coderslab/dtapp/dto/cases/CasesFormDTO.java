@@ -9,14 +9,16 @@ import java.time.LocalDate;
 
 @Data
 public class CasesFormDTO {
-    @NotBlank
+    @NotBlank(message = "{NotBlank.message}")
     private String patientName;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate deadline;
     @NotBlank(message = "{NotBlank.message}")
     @Size(min = 2, max = 2, message = "{WrongToothNumber.message}")
     private String toothNumber;
+    @NotBlank(message = "{NotBlank.message}")
     private String toothColor;
+    @NotBlank(message = "{NotBlank.message}")
     private String toothProstheticType;
     private String note;
     private long technicianId;

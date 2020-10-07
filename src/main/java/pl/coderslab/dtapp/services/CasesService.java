@@ -17,6 +17,8 @@ public interface CasesService {
 
     CasesEditFormDTO findCaseById(Long id) throws NotFoundException;
 
+
     void create(CasesFormDTO casesFormDTO);
     void update(CasesEditFormDTO casesEditFormDTO) throws NotFoundException;
+
 }
