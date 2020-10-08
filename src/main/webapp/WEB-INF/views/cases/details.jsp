@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<p><a href="/u/cases/edit/${caseById.id}">Edytuj</a></p>
 <table>
     <tr>
         <th>Pacjent</th>
@@ -27,5 +28,6 @@
         <td>${caseById.note}</td>
     </tr>
 </table>
+<p><a href="/u/cases/delete/${caseById.id}">Usuń</a> </p>
 </body>
 </html>

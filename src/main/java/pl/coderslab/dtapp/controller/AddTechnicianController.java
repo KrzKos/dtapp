@@ -1,5 +1,6 @@
 package pl.coderslab.dtapp.controller;
 
+import freemarker.template.TemplateException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.dtapp.dto.technician.RegistrationRegularTechDTO;
 import pl.coderslab.dtapp.services.AddRegularTechService;
+import pl.coderslab.dtapp.services.MailService;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -39,7 +42,7 @@ public class AddTechnicianController {
 */
     @PostMapping
     public String saveRegularTech(@ModelAttribute("regularTech") @Valid RegistrationRegularTechDTO regularTechDTO,
-                                  BindingResult result) {
+                                  BindingResult result) throws IOException, TemplateException {
         if (result.hasErrors()) {
             return "register/regularTechForm";
         }

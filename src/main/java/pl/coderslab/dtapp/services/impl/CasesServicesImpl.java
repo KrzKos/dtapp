@@ -4,6 +4,7 @@ import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import pl.coderslab.dtapp.auth.AuthenticationFacade;
 import pl.coderslab.dtapp.domain.entities.Cases;
@@ -56,11 +57,21 @@ public class CasesServicesImpl implements CasesService {
     @Override
     public CasesEditFormDTO findCaseById(Long id) throws NotFoundException {
         User technician = userRepository.findByEmail(authentication.getAuthentication().getName());
-        Cases cases = caseRepository.findByIdAndTechnician(id, technician);
 
-        if (cases == null) {
-            throw new NotFoundException("Nie znaleziono zlecenia");
+        if (authentication.getAuthentication().getAuthorities().contains(new SimpleGrantedAuthority("SUPER_TECH"))) {
+            Cases cases = caseRepository.findByIdAndLaboratory(id, laboratoryRepository.findLaboratoryByTechnician(technician));
+            return getCasesEditFormDTO(cases);
+        } else {
+            Cases cases = caseRepository.findByIdAndTechnician(id, technician);
+
+            if (cases == null) {
+                throw new NotFoundException("Nie znaleziono zlecenia");
+            }
+            return getCasesEditFormDTO(cases);
         }
+    }
+
+    private CasesEditFormDTO getCasesEditFormDTO(Cases cases) {
         CasesEditFormDTO caseToEdit = modelMapper.map(cases, CasesEditFormDTO.class);
         cases.getTeeth().stream()
                 .forEach(t -> {
@@ -108,10 +119,22 @@ public class CasesServicesImpl implements CasesService {
     @Override
     public void update(CasesEditFormDTO casesEditFormDTO) throws NotFoundException {
         User technician = userRepository.findByEmail(authentication.getAuthentication().getName());
+        Laboratory laboratory = laboratoryRepository.findLaboratoryByTechnician(technician);
+        if (authentication.getAuthentication().getAuthorities().contains(new SimpleGrantedAuthority("SUPER_TECH"))) {
+            Cases caseToEdit = caseRepository.findByIdAndLaboratory(casesEditFormDTO.getId(), laboratoryRepository.findLaboratoryByTechnician(technician));
+            editCase(casesEditFormDTO, caseToEdit, technician);
+        } else {
+            Cases caseToEdit = caseRepository.findByIdAndTechnician(casesEditFormDTO.getId(), technician);
+            editCase(casesEditFormDTO, caseToEdit, technician);
+        }
+    }
 
-        Cases caseToEdit = caseRepository.findByIdAndTechnician(casesEditFormDTO.getId(), technician);
+    private void editCase(CasesEditFormDTO casesEditFormDTO, Cases caseToEdit, User technician) throws NotFoundException {
         if (caseToEdit == null) {
-            throw new NotFoundException("Nie znaleziono zlecenia do edycji");
+            throw new NotFoundException("Nie znaleziono zlecenia" + casesEditFormDTO.getId() + " do edycji lub nie masz do tego uprawnień");
+        }
+        if (casesEditFormDTO.getTechnicianId() == 0) {
+            casesEditFormDTO.setTechnicianId(technician.getId());
         }
         Optional<User> casesTechnician = userRepository.findById(casesEditFormDTO.getTechnicianId());
         casesTechnician.ifPresent(caseToEdit::setTechnician);
@@ -126,7 +149,6 @@ public class CasesServicesImpl implements CasesService {
         caseToEdit.setTeeth(toothList);
         caseToEdit.setNote(casesEditFormDTO.getNote());
         caseRepository.save(caseToEdit);
-
     }
 
 

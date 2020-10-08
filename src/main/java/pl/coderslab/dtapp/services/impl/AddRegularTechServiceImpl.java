@@ -1,5 +1,6 @@
 package pl.coderslab.dtapp.services.impl;
 
+import freemarker.template.TemplateException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -8,12 +9,15 @@ import org.springframework.stereotype.Service;
 import pl.coderslab.dtapp.auth.AuthenticationFacade;
 import pl.coderslab.dtapp.domain.entities.Laboratory;
 import pl.coderslab.dtapp.domain.entities.User;
+import pl.coderslab.dtapp.domain.entities.embedable.EmailMessage;
 import pl.coderslab.dtapp.domain.repositories.LaboratoryRepository;
 import pl.coderslab.dtapp.domain.repositories.UserRepository;
 import pl.coderslab.dtapp.dto.technician.RegistrationRegularTechDTO;
 import pl.coderslab.dtapp.services.AddRegularTechService;
+import pl.coderslab.dtapp.services.MailService;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -27,9 +31,10 @@ public class AddRegularTechServiceImpl implements AddRegularTechService {
     private final AuthenticationFacade authentication;
     private final LaboratoryRepository laboratoryRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final MailService mailService;
 
     @Override
-    public void create(RegistrationRegularTechDTO techDTO) {
+    public void create(RegistrationRegularTechDTO techDTO) throws IOException, TemplateException {
         User superUser = userRepository.findByEmail(authentication.getAuthentication().getName());
         long labId = laboratoryRepository.findLaboratoryByTechnician(superUser).getId();
 
@@ -49,8 +54,12 @@ public class AddRegularTechServiceImpl implements AddRegularTechService {
             }
         }
 
+        /*EmailMessage emailMessage = new EmailMessage();
+        emailMessage.setCode(passwordEncoder.encode("pass"));
+        emailMessage.setTitle("JAkiś tytuł");
 
-
+        mailService.sendEmail("clkrzyko@gmail.com","krzysztof.kostkiewicz@gmail.com","Zaproszenie do", emailMessage );
+*/
 
     }
 

@@ -14,7 +14,7 @@
     <sec:authorize access="hasAuthority('SUPER_TECH')">
         <spring:message code="app.caseTechnician"/>
         <form:select path="technicianId" multiple="false">
-            <form:option value="0" label=" "/>
+            <form:option value="0" label="-- Wybierz technika --"/>
             <form:options items="${technicians}" itemValue="id" itemLabel="fullName"/>
         </form:select><br>
         <sec:csrfInput/>
