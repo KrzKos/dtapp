@@ -60,6 +60,9 @@ public class CasesServicesImpl implements CasesService {
 
         if (authentication.getAuthentication().getAuthorities().contains(new SimpleGrantedAuthority("SUPER_TECH"))) {
             Cases cases = caseRepository.findByIdAndLaboratory(id, laboratoryRepository.findLaboratoryByTechnician(technician));
+            if (cases == null) {
+                throw new NotFoundException("Nie znaleziono zlecenia");
+            }
             return getCasesEditFormDTO(cases);
         } else {
             Cases cases = caseRepository.findByIdAndTechnician(id, technician);

@@ -1,6 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -10,35 +11,81 @@
     <title>Title</title>
 </head>
 <body>
+
 <jsp:include page="/WEB-INF/views/fragments/menu.jsp"/>
-<div class="container">
-    <div>
-        <form:form modelAttribute="regularTech" method="post">
-            <spring:message code="app.firstName"/> <form:input path="firstName"/>
-            <spring:message code="app.lastName"/> <form:input path="lastName"/>
-            <spring:message code="app.email"/> <form:input path="email"/>
-            <spring:message code="app.phoneNumber"/> <form:input path="phoneNumber"/>
-            <button type="submit"><spring:message code="button.save"/> </button>
-        </form:form>
+<section class="hero is-dark mb-3">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                Technicy
+            </h1>
+            <h2 class="subtitle">
+                Zarządzaj swoim teamem
+            </h2>
+        </div>
     </div>
-    <div class="table">
-        <table class="table">
-            <tr>
-                <th>Imię</th>
-                <th>Nazwisko</th>
-                <th>Numer telefonu</th>
-                <th>Email</th>
-            </tr>
-            <c:forEach items="${techList}" var="tech">
-                <tr>
-                <td>${tech.firstName}</td>
-                <td>${tech.lastName}</td>
-                <td>${tech.phoneNumber}</td>
-                <td>${tech.email}</td>
-                </tr>
-            </c:forEach>
-        </table>
+</section>
+<div class="container is-widescreen">
+    <div class="columns">
+        <div class="column is-two-fifths">
+            <div class="box">
+                <h3 class="subtitle is-3">Dodaj technika do teamu</h3>
+                <form:form modelAttribute="regularTech" method="post">
+                <div class="field">
+                    <label class="label"><spring:message code="app.firstName"/></label>
+                    <div class="controll">
+                        <form:input cssClass="input is-small" path="firstName"/>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label"><spring:message code="app.lastName"/> </label>
+                    <div class="controll">
+                        <form:input cssClass="input is-small" path="lastName"/>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label"><spring:message code="app.email"/></label>
+                    <div class="controll">
+                        <form:input cssClass="input is-small" path="email"/>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label"><spring:message code="app.phoneNumber"/> </label>
+                    <div class="controll">
+                        <form:input cssClass="input" path="phoneNumber"/>
+                    </div>
+                </div>
+                <button class="button is-info" type="submit"><spring:message code="button.save"/></button>
+            </div>
+            </form:form>
+            </div>
+
+        <div class="column is-full is-info is-light">
+            <div class="table is-fullwidth">
+                <table class="table is-striped is-hoverable">
+                    <tr>
+                        <th>Imię</th>
+                        <th>Nazwisko</th>
+                        <th>Numer telefonu</th>
+                        <th>Email</th>
+                    </tr>
+                    <c:forEach items="${techList}" var="tech">
+                        <tr>
+                            <td>${tech.firstName}</td>
+                            <td>${tech.lastName}</td>
+                            <td>${tech.phoneNumber}</td>
+                            <td>${tech.email}</td>
+                            <td><a class="button is-warning is-small" href="/u/tech/deactivate/${tech.id}">Dezaktywuj</a></td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
+        </div>
     </div>
+
+</div>
+
+
 </div>
 
 </body>

@@ -15,10 +15,12 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
+            <a href="/u/tech" class="navbar-item">
+                TEAM
+            </a>
 
-
-            <a class="navbar-item">
-                Documentation
+            <a href="/u/cases" class="navbar-item">
+                Zlecenia
             </a>
 
             <div class="navbar-item has-dropdown is-hoverable">

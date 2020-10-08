@@ -59,7 +59,7 @@
                 <div class="control">
                     <form:input cssClass="input" path="toothColor"/>
                 </div>
-                <form:errors path="toothColor"/>
+                <form:errors cssClass="is-warning" path="toothColor"/>
             </div>
 
             <div class="field">
@@ -67,7 +67,7 @@
                 <div class="control">
                     <form:input cssClass="input" path="toothProstheticType"/>
                 </div>
-                <form:errors path="toothProstheticType"/>
+                <form:errors cssClass="is-warning" path="toothProstheticType"/>
             </div>
             <div class="field">
                 <label class="label"></label>
@@ -78,7 +78,7 @@
             <div class="field">
                 <label class="label"><spring:message code="app.note"/></label>
                 <div class="control">
-                    <form:textarea cssClass="input" path="note" cols="10" rows="5"/>
+                    <form:textarea cssClass="textarea" path="note" cols="10" rows="5"/>
                 </div>
             </div>
             <div class="control">

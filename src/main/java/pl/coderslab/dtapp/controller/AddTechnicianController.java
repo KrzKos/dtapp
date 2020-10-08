@@ -47,7 +47,7 @@ public class AddTechnicianController {
             return "register/regularTechForm";
         }
         addRegularTechService.create(regularTechDTO);
-        return "redirect:/user/techList";
+        return "redirect:/u/tech";
     }
 
 }

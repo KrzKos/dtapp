@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.dtapp.domain.entities.Cases;
+import pl.coderslab.dtapp.dto.cases.CasesDTO;
 import pl.coderslab.dtapp.services.CasesDeleteService;
 
 @RequiredArgsConstructor
@@ -19,9 +20,7 @@ public class DeleteCasesController {
 
     @GetMapping("/{id}")
     public String deleteCase(@PathVariable Long id) throws NotFoundException {
-        Cases cases = casesDeleteService.findById(id);
-       /* casesDeleteService.remove(cases);
-        return "messages/deleteSuccess";*/
+        CasesDTO cases = casesDeleteService.findById(id);
         try {
             casesDeleteService.remove(cases);
             return "messages/deleteSuccess";
