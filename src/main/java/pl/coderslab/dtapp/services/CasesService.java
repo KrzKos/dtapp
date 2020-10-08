@@ -13,7 +13,7 @@ import java.util.List;
 public interface CasesService {
     List<CasesDTO> findCasesByTechnicianOrderByCreatedOnDesc(User technician);
 
-    List<CasesDTO> findCasesByLaboratory(Laboratory laboratory);
+    List<CasesDTO> findCasesByLaboratory();
 
     CasesEditFormDTO findCaseById(Long id) throws NotFoundException;
 

@@ -18,6 +18,7 @@ import pl.coderslab.dtapp.domain.repositories.UserRepository;
 import pl.coderslab.dtapp.dto.cases.CasesDTO;
 import pl.coderslab.dtapp.dto.cases.CasesEditFormDTO;
 import pl.coderslab.dtapp.dto.cases.CasesFormDTO;
+import pl.coderslab.dtapp.dto.laboratory.LaboratoryDTO;
 import pl.coderslab.dtapp.services.CasesService;
 
 import javax.transaction.Transactional;
@@ -36,6 +37,10 @@ public class CasesServicesImpl implements CasesService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
+    protected final User getUser() {
+        return userRepository.findByEmail(authentication.getAuthentication().getName());
+    }
+
     @Override
     public List<CasesDTO> findCasesByTechnicianOrderByCreatedOnDesc(User technician) {
         List<Cases> cases = caseRepository.findCasesByTechnicianOrderByCreatedOnDesc(technician);
@@ -45,10 +50,18 @@ public class CasesServicesImpl implements CasesService {
     }
 
     @Override
-    public List<CasesDTO> findCasesByLaboratory(Laboratory laboratory) {
-        List<Cases> cases = caseRepository.findCasesByLaboratory(laboratory);
-        List<CasesDTO> casesDTOS = cases.stream()
-                .map(c -> modelMapper.map(c, CasesDTO.class))
+    public List<CasesDTO> findCasesByLaboratory() {
+        //Laboratory laboratory = modelMapper.map(laboratoryDTO,Laboratory.class);
+        if (authentication.getAuthentication().getAuthorities().contains(new SimpleGrantedAuthority("SUPER_TECH"))){
+            Laboratory laboratory = laboratoryRepository.findLaboratoryByTechnician(getUser());
+            List<Cases> cases = caseRepository.findCasesByLaboratory(laboratory);
+            List<CasesDTO> casesDTOS = cases.stream()
+                    .map(c -> modelMapper.map(c, CasesDTO.class))
+                    .collect(Collectors.toList());
+            return casesDTOS;
+        }
+        List<Cases> cases = caseRepository.findCasesByTechnicianOrderByCreatedOnDesc(getUser());
+        List<CasesDTO> casesDTOS = cases.stream().map(c -> modelMapper.map(c, CasesDTO.class))
                 .collect(Collectors.toList());
         return casesDTOS;
 
