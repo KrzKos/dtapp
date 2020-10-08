@@ -77,6 +77,9 @@ public class CasesServicesImpl implements CasesService {
         User user = userRepository.findByEmail(authentication.getAuthentication().getName());
 
         Long labId = laboratoryRepository.findLaboratoryByTechnician(user).getId();
+        if (casesFormDTO.getTechnicianId() == 0) {
+            casesFormDTO.setTechnicianId(user.getId());
+        }
         Cases cases = modelMapper.map(casesFormDTO, Cases.class);
         Tooth tooth = new Tooth();
         tooth.setColor(casesFormDTO.getToothColor());
@@ -95,6 +98,7 @@ public class CasesServicesImpl implements CasesService {
         if (lab.isPresent()) {
             cases.setLaboratory(lab.get());
         }
+
         cases.setId(null);
         caseRepository.save(cases);
 

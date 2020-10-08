@@ -6,7 +6,9 @@ import lombok.ToString;
 import pl.coderslab.dtapp.domain.entities.embedable.Address;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter @Setter @ToString
@@ -19,6 +21,6 @@ public class Laboratory extends BaseEntity{
     private Address address;
     @OneToMany
     @Column(name = "user_id")
-    private Set<User> technician = new HashSet<>();
+    private List<User> technician = new ArrayList<>();
 
 }

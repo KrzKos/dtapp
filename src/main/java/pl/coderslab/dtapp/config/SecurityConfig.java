@@ -22,6 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/register").permitAll()
+                .antMatchers("/u/tech/**").hasAuthority("SUPER_TECH")
                 .antMatchers("/u/**").hasAnyAuthority("SUPER_TECH", "TECH")
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").usernameParameter("email").defaultSuccessUrl("/u/cases")

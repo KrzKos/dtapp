@@ -9,8 +9,8 @@ import pl.coderslab.dtapp.domain.entities.Laboratory;
 import pl.coderslab.dtapp.domain.entities.User;
 import pl.coderslab.dtapp.domain.repositories.LaboratoryRepository;
 import pl.coderslab.dtapp.domain.repositories.UserRepository;
-import pl.coderslab.dtapp.dto.LaboratoryDTO;
-import pl.coderslab.dtapp.dto.RegistrationTechnicianDTO;
+import pl.coderslab.dtapp.dto.laboratory.LaboratoryDTO;
+import pl.coderslab.dtapp.dto.technician.RegistrationTechnicianDTO;
 import pl.coderslab.dtapp.services.TechnicianService;
 
 import javax.transaction.Transactional;

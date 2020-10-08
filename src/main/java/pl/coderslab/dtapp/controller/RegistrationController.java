@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.dtapp.dto.RegistrationTechnicianDTO;
+import pl.coderslab.dtapp.dto.technician.RegistrationTechnicianDTO;
 import pl.coderslab.dtapp.services.TechnicianService;
 
 

@@ -1,4 +1,4 @@
-package pl.coderslab.dtapp.dto;
+package pl.coderslab.dtapp.dto.laboratory;
 
 import lombok.Data;
 

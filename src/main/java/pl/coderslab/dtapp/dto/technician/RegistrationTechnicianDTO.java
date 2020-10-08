@@ -1,4 +1,4 @@
-package pl.coderslab.dtapp.dto;
+package pl.coderslab.dtapp.dto.technician;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.pl.NIP;
