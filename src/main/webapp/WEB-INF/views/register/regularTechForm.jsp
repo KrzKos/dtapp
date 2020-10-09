@@ -36,26 +36,29 @@
                     <div class="controll">
                         <form:input cssClass="input is-small" path="firstName"/>
                     </div>
+                    <form:errors path="firstName"/>
                 </div>
                 <div class="field">
                     <label class="label"><spring:message code="app.lastName"/> </label>
                     <div class="controll">
                         <form:input cssClass="input is-small" path="lastName"/>
                     </div>
+                    <form:errors path="lastName"/>
                 </div>
                 <div class="field">
                     <label class="label"><spring:message code="app.email"/></label>
                     <div class="controll">
                         <form:input cssClass="input is-small" path="email"/>
                     </div>
+                    <form:errors path="email"/>
                 </div>
                 <div class="field">
                     <label class="label"><spring:message code="app.phoneNumber"/> </label>
                     <div class="controll">
-                        <form:input cssClass="input" path="phoneNumber"/>
+                        <form:input cssClass="input is-small" path="phoneNumber"/>
                     </div>
                 </div>
-                <button class="button is-info" type="submit"><spring:message code="button.save"/></button>
+                <button class="button is-info is-small" type="submit"><spring:message code="button.save"/></button>
             </div>
             </form:form>
             </div>

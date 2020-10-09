@@ -6,5 +6,5 @@ import pl.coderslab.dtapp.domain.entities.embedable.EmailMessage;
 import java.io.IOException;
 
 public interface MailService {
-    void sendEmail(String from, String to, String subject, EmailMessage emailMessage) throws IOException, TemplateException;
+    void sendEmail(String from, String to, String subject, String text) throws IOException, TemplateException;
 }

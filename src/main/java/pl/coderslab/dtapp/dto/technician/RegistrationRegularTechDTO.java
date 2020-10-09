@@ -9,13 +9,14 @@ import javax.validation.constraints.Size;
 @Data
 public class RegistrationRegularTechDTO {
     private long id;
-    @NotBlank
-    @Size(min = 3)
+    @NotBlank(message = "{NotBlank.message}")
+    @Size(min = 3, message = "{SizeMin3.message}")
     private String firstName;
-    @NotBlank
-    @Size(min = 3)
+    @NotBlank(message = "{NotBlank.message}")
+    @Size(min = 3, message = "{SizeMin3.message}")
     private String lastName;
-    @Email
+    @NotBlank(message = "{NotBlank.message}")
+    @Email(message = "{WrongEmail.message}")
     private String email;
     private String password;
     private Long laboratoryId;

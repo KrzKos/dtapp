@@ -19,18 +19,18 @@ import java.io.IOException;
 public class MailServiceImpl implements MailService {
     private final JavaMailSender javaMailSender;
 
-    public void sendEmail(String from, String to, String subject, EmailMessage emailMessage) throws IOException, TemplateException {
+    public void sendEmail(String from, String to, String subject, String text) throws IOException, TemplateException {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(to);
         message.setSubject(subject);
 
-        FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
-        freeMarkerConfigurer.setTemplateLoaderPath("/WEB-INF/mail/templates");
-        Configuration config = freeMarkerConfigurer.createConfiguration();
-        Template mailTemplate = config.getTemplate("invitation-mail.ftl");
-        String mailBody = FreeMarkerTemplateUtils.processTemplateIntoString(mailTemplate, emailMessage);
-        message.setText(mailBody);
+//        FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
+//        freeMarkerConfigurer.setTemplateLoaderPath("/WEB-INF/mail/templates");
+      //  Configuration config = freeMarkerConfigurer.createConfiguration();
+       // Template mailTemplate = config.getTemplate("invitation-mail.ftl");
+        //String mailBody = FreeMarkerTemplateUtils.processTemplateIntoString(mailTemplate, null);
+        message.setText(text);
 
 
         javaMailSender.send(message);

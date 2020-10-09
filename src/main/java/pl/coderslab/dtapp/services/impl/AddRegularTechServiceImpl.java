@@ -7,9 +7,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.coderslab.dtapp.auth.AuthenticationFacade;
+import pl.coderslab.dtapp.domain.entities.ConfirmationToken;
 import pl.coderslab.dtapp.domain.entities.Laboratory;
 import pl.coderslab.dtapp.domain.entities.User;
 import pl.coderslab.dtapp.domain.entities.embedable.EmailMessage;
+import pl.coderslab.dtapp.domain.repositories.ConfirmationTokenRepository;
 import pl.coderslab.dtapp.domain.repositories.LaboratoryRepository;
 import pl.coderslab.dtapp.domain.repositories.UserRepository;
 import pl.coderslab.dtapp.dto.technician.RegistrationRegularTechDTO;
@@ -32,21 +34,30 @@ public class AddRegularTechServiceImpl implements AddRegularTechService {
     private final LaboratoryRepository laboratoryRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final MailService mailService;
+    private final ConfirmationTokenRepository confirmationTokenRepository;
 
     @Override
     public void create(RegistrationRegularTechDTO techDTO) throws IOException, TemplateException {
+        if (userRepository.findByEmail(techDTO.getEmail()) != null) {
+            throw new IllegalArgumentException("Ten adres email już istnieje");
+        }
         User superUser = userRepository.findByEmail(authentication.getAuthentication().getName());
         long labId = laboratoryRepository.findLaboratoryByTechnician(superUser).getId();
 
-        User newUser = modelMapper.map(techDTO,User.class);
+
+        User newUser = modelMapper.map(techDTO, User.class);
         newUser.setPassword(passwordEncoder.encode("pass"));
         newUser.setRole("TECH");
-        newUser.setActive(true);
         Long newUserId = userRepository.save(newUser).getId();
+
+        ConfirmationToken confirmationToken = new ConfirmationToken();
+        confirmationToken.setConfirmationToken(UUID.randomUUID().toString());
+        confirmationToken.setUser(userRepository.findById(newUserId).get());
+        confirmationTokenRepository.save(confirmationToken);
 
         Optional<Laboratory> lab = laboratoryRepository.findById(labId);
         Laboratory laboratory;
-        if(lab.isPresent()) {
+        if (lab.isPresent()) {
             laboratory = lab.get();
             if (userRepository.findById(newUserId).isPresent()) {
                 laboratory.getTechnician().add(userRepository.findById(newUserId).get());
@@ -54,22 +65,35 @@ public class AddRegularTechServiceImpl implements AddRegularTechService {
             }
         }
 
-        /*EmailMessage emailMessage = new EmailMessage();
-        emailMessage.setCode(passwordEncoder.encode("pass"));
-        emailMessage.setTitle("JAkiś tytuł");
+        String mailConten = "Potwierdź rejestrsację klikając: http://localhost:8080/confirm?token=" + confirmationToken.getConfirmationToken();
 
-        mailService.sendEmail("clkrzyko@gmail.com","krzysztof.kostkiewicz@gmail.com","Zaproszenie do", emailMessage );
-*/
+        mailService.sendEmail("clkrzyko@gmail.com","clkrzyko@gmail.com","Rejestracja do Dtapp",  mailConten);
 
     }
+
+
 
     @Override
     public List<RegistrationRegularTechDTO> showAllRegularTechs() {
         Long labId = laboratoryRepository.findLaboratoryByTechnician(userRepository.findByEmail(authentication.getAuthentication().getName())).getId();
         List<User> regularTechList = userRepository.findAllByLabId(labId);
-       List<RegistrationRegularTechDTO> regularTechDTOList = regularTechList.stream()
-               .map(user -> modelMapper.map(user,RegistrationRegularTechDTO.class))
-               .collect(Collectors.toList());
-        return  regularTechDTOList;
+        List<RegistrationRegularTechDTO> regularTechDTOList = regularTechList.stream()
+                .map(user -> modelMapper.map(user, RegistrationRegularTechDTO.class))
+                .collect(Collectors.toList());
+        return regularTechDTOList;
+    }
+
+    @Override
+    public void confirmAccount(String token) throws IllegalArgumentException {
+        ConfirmationToken confirmationToken = confirmationTokenRepository.findByConfirmationToken(token);
+
+        if (confirmationToken == null) {
+            throw new IllegalArgumentException("Błędny token");
+        }
+
+        User userToActivate = userRepository.findByEmail(confirmationToken.getUser().getEmail());
+        userToActivate.setActive(true);
+        userRepository.save(userToActivate);
+
     }
 }
