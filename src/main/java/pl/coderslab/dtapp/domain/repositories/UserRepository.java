@@ -15,6 +15,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("select l.technician from Laboratory l where l.id = ?1")
     List<User> findAllByLabId(long id);
 
+
     // do testów
     boolean existsByFirstName(String firstName);
 

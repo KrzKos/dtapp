@@ -8,29 +8,78 @@
     <title>Title</title>
 </head>
 <body>
-<p><a href="/u/cases/edit/${caseById.id}">Edytuj</a></p>
-<table>
-    <tr>
-        <th>Pacjent</th>
-        <th>Data zlecenia</th>
-        <th>Data do oddania</th>
-        <th>Nr zęba</th>
-        <th>Kolor zęba</th>
-        <th>Rodzaj pracy</th>
-        <th>Technik</th>
-        <th>Notatka</th>
-    </tr>
-    <tr>
-        <td>${caseById.patient}</td>
-        <td>${caseById.createdOn}</td>
-        <td>${caseById.deadLine}</td>
-        <td>${caseById.toothNumber}</td>
-        <td>${caseById.toothColor}</td>
-        <td>${caseById.toothProstheticType}</td>
-        <td>${caseById.technician}</td>
-        <td>${caseById.note}</td>
-    </tr>
-</table>
-<p><a href="/u/cases/delete/${caseById.id}">Usuń</a> </p>
+<jsp:include page="/WEB-INF/views/fragments/menu.jsp"/>
+<section class="hero">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                ${caseById.patient}
+            </h1>
+            <h2 class="subtitle">
+                Termin do oddania: <strong>${caseById.deadLine}</strong>
+            </h2>
+        </div>
+    </div>
+</section>
+<nav class="level">
+    <!-- Left side -->
+    <div class="level-left">
+
+    </div>
+
+    <!-- Right side -->
+    <div class="level-right">
+        <a href="/u/cases/edit/${caseById.id}" class="button is-success is-small">Edytuj</a>
+
+    </div>
+</nav>
+<div class="container">
+    <div class="columns">
+        <div class="column is-one-third">
+
+            <div class="notification is-primary is-light">
+                <h5 class="subtitle is-5"><u>Notatka</u></h5>
+                ${caseById.note}
+            </div>
+        </div>
+        <div class="column">
+            <div class="table">
+                <table class="table is-fullwidth">
+                    <tr>
+                        <th>Data zlecenia</th>
+                        <th>Nr zęba</th>
+                        <th>Kolor zęba</th>
+                        <th>Rodzaj pracy</th>
+                        <th>Technik</th>
+                    </tr>
+                    <tr>
+
+                        <td>${caseById.createdOn}</td>
+                        <td>${caseById.toothNumber}</td>
+                        <td>${caseById.toothColor}</td>
+                        <td>${caseById.toothProstheticType}</td>
+                        <td>${caseById.technician}</td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<nav class="level m5">
+    <!-- Left side -->
+    <div class="level-left">
+
+    </div>
+
+    <!-- Right side -->
+    <div class="level-right">
+        <p><a href="/u/cases/delete/${caseById.id}" class="button is-danger is-small">Usuń</a> </p>
+    </div>
+</nav>
+
+
+
 </body>
 </html>

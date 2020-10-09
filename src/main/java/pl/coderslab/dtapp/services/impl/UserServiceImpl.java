@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 import pl.coderslab.dtapp.domain.entities.User;
 import pl.coderslab.dtapp.domain.repositories.UserRepository;
 import pl.coderslab.dtapp.dto.dentist.DentistNameDTO;
+import pl.coderslab.dtapp.dto.technician.RegularTechDTO;
 import pl.coderslab.dtapp.dto.technician.TechnicianNameDTO;
 import pl.coderslab.dtapp.services.UserService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -42,6 +44,12 @@ public class UserServiceImpl implements UserService {
                 .map(t -> modelMapper.map(t,TechnicianNameDTO.class))
                 .collect(Collectors.toList());
         return technicianNameDTOS;
+    }
+
+    @Override
+    public RegularTechDTO findById(long id) {
+        Optional<User> resultUser = userRepository.findById(id);
+        return resultUser.map(user -> modelMapper.map(user, RegularTechDTO.class)).orElse(null);
     }
 
 }

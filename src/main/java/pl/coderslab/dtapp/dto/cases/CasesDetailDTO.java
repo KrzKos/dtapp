@@ -1,6 +1,7 @@
 package pl.coderslab.dtapp.dto.cases;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,6 +17,7 @@ public class CasesDetailDTO {
     private String toothColor;
     private String toothProstheticType;
     private LocalDate deadLine;
+    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
     private LocalDateTime createdOn;
 
 }

@@ -32,7 +32,7 @@
                 <th><spring:message code="app.caseDeadline"/></th>
                 <th><spring:message code="app.caseTechnician"/></th>
 
-                <th><spring:message code="app.status"/></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -45,15 +45,9 @@
                     <td>${case.technicianFullName}</td>
 
                     <td>
-                        <a href="#" class="button is-small is-info">
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-flag" title="<spring:message code="status.active" />"></i>
-                            </span>
-                        </a>
-                        <a href="/u/cases/detail/${case.id}" class="button is-small is-info">
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-flag" title="<spring:message code="status.active" />"></i>
-                            </span>
+
+                        <a href="/u/cases/detail/${case.id}" class="button is-small is-light">
+                            szczegóły
                         </a>
                     </td>
                 </tr>

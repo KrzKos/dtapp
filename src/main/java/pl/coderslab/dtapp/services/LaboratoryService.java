@@ -7,4 +7,5 @@ import pl.coderslab.dtapp.dto.technician.TechnicianNameDTO;
 
 public interface LaboratoryService {
     LaboratoryDTO findLaboratoryByTechnician(TechnicianNameDTO technicianDTO);
+    LaboratoryDTO getUserLaboratory();
 }

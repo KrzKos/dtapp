@@ -21,7 +21,7 @@ public class CasesDetailController {
         if (casesDetailDTO == null){
             return "error/notFound";
         }
-        model.addAttribute("caseById", casesDetailsService.getCaseById(id));
+        model.addAttribute("caseById", casesDetailDTO);
         return "cases/details";
     }
 }

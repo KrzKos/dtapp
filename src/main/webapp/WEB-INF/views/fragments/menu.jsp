@@ -17,10 +17,14 @@
         <div class="navbar-start">
 
 
-            <a class="navbar-item">
-                Documentation
+            <a href="/u/cases" class="navbar-item">
+                Zlecenia
             </a>
-
+            <sec:authorize access="hasAuthority('SUPER_TECH')">
+            <a href="/u/tech" class="navbar-item">
+                Technicy
+            </a>
+            </sec:authorize>
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">
                     More
@@ -43,28 +47,14 @@
                 </div>
             </div>
         </div>
-        <div class="navbar-end">
-            <div class="navbar-item">
-                <div class="buttons">
-                    <a href="/register" class="button is-primary">
-                        <strong><spring:message code="button.signIn"/></strong>
-                    </a>
-                    <a href="/login" class="button is-light">
-                        Log in
-                    </a>
-                </div>
-            </div>
-        </div>
         <sec:authorize access="isAuthenticated()">
         <div class="navbar-end">
             <div class="navbar-item">
-                <p>Witaj, <sec:authentication property="name"/></p>
-                <div class="control">
+                Witaj, <sec:authentication property="name"/>
                         <form action="<c:url value="/logout"/>" method="post">
-                            <button class="button is-primary"><spring:message code="button.logout"/></button>
+                            <button class="button is-link is-rounded is-small"><spring:message code="button.logout"/></button>
                             <sec:csrfInput/>
                         </form>
-                </div>
             </div>
         </div>
         </sec:authorize>

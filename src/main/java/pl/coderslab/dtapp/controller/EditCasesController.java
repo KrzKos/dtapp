@@ -10,6 +10,7 @@ import pl.coderslab.dtapp.dto.technician.TechnicianNameDTO;
 import pl.coderslab.dtapp.services.CasesService;
 import pl.coderslab.dtapp.services.UserService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -32,7 +33,7 @@ public class EditCasesController {
         return "cases/editForm";
     }
     @PostMapping("/{id}")
-    private String updateCase(@PathVariable Long id, @ModelAttribute("caseToEdit") CasesEditFormDTO casesEditFormDTO) throws NotFoundException {
+    private String updateCase(@PathVariable Long id, @ModelAttribute("caseToEdit") @Valid CasesEditFormDTO casesEditFormDTO) throws NotFoundException {
         casesService.update(casesEditFormDTO);
         return "redirect:/u/cases/detail/{id}";
     }

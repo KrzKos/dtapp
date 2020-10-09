@@ -7,8 +7,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.dtapp.auth.AuthenticationFacade;
 import pl.coderslab.dtapp.dto.cases.CasesFormDTO;
+import pl.coderslab.dtapp.dto.laboratory.LaboratoryDTO;
 import pl.coderslab.dtapp.dto.technician.TechnicianNameDTO;
 import pl.coderslab.dtapp.services.CasesService;
+import pl.coderslab.dtapp.services.LaboratoryService;
 import pl.coderslab.dtapp.services.UserService;
 
 import javax.validation.Valid;
@@ -22,11 +24,17 @@ public class AddCaseController {
     private final AuthenticationFacade authentication;
     private final UserService userService;
     private final CasesService casesService;
+    private final LaboratoryService laboratoryService;
 
    /* @ModelAttribute("dentists")
     public List<DentistNameDTO> getAllDentists() {
         return userService.getAllDentists();
     }*/
+
+    @ModelAttribute("laboratory")
+    public LaboratoryDTO getLaboratory() {
+        return laboratoryService.getUserLaboratory();
+    }
 
     @ModelAttribute("technicians")
     public List<TechnicianNameDTO> getAllTechnicians() {

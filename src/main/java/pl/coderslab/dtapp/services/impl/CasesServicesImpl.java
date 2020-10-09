@@ -18,7 +18,7 @@ import pl.coderslab.dtapp.domain.repositories.UserRepository;
 import pl.coderslab.dtapp.dto.cases.CasesDTO;
 import pl.coderslab.dtapp.dto.cases.CasesEditFormDTO;
 import pl.coderslab.dtapp.dto.cases.CasesFormDTO;
-import pl.coderslab.dtapp.dto.laboratory.LaboratoryDTO;
+import pl.coderslab.dtapp.dto.technician.RegularTechDTO;
 import pl.coderslab.dtapp.services.CasesService;
 
 import javax.transaction.Transactional;
@@ -68,6 +68,14 @@ public class CasesServicesImpl implements CasesService {
     }
 
     @Override
+    public List<CasesDTO> findCasesByPatientNameAndLaboratory(String name, Laboratory laboratory) {
+        List<Cases> casesList = caseRepository.findByPatientNameAndLaboratory(name, laboratory);
+        List<CasesDTO> casesDTO = casesList.stream().map(c -> modelMapper.map(c, CasesDTO.class))
+                .collect(Collectors.toList());
+        return casesDTO;
+    }
+
+    @Override
     public CasesEditFormDTO findCaseById(Long id) throws NotFoundException {
         User technician = userRepository.findByEmail(authentication.getAuthentication().getName());
 
@@ -85,6 +93,12 @@ public class CasesServicesImpl implements CasesService {
             }
             return getCasesEditFormDTO(cases);
         }
+    }
+
+    @Override
+    public long countCasesByTechnician(RegularTechDTO technicianDTO) {
+        User technician = modelMapper.map(technicianDTO,User.class);
+        return caseRepository.countCasesByTechnician(technician);
     }
 
     private CasesEditFormDTO getCasesEditFormDTO(Cases cases) {

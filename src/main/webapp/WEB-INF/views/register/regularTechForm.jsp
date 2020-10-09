@@ -68,6 +68,8 @@
                         <th>Nazwisko</th>
                         <th>Numer telefonu</th>
                         <th>Email</th>
+                        <th>Prace</th>
+                        <th>Akcje</th>
                     </tr>
                     <c:forEach items="${techList}" var="tech">
                         <tr>
@@ -75,7 +77,11 @@
                             <td>${tech.lastName}</td>
                             <td>${tech.phoneNumber}</td>
                             <td>${tech.email}</td>
-                            <td><a class="button is-warning is-small" href="/u/tech/deactivate/${tech.id}">Dezaktywuj</a></td>
+                            <td>${tech.casesNumber}</td>
+                            <td>
+                                <c:if test="${tech.active == 'true'}"><a class="button is-warning is-small" href="/u/tech/active/disable/${tech.id}">Dezaktywuj</a></c:if>
+                                <c:if test="${tech.active == 'false'}"><a class="button is-success is-small" href="/u/tech/active/enable/${tech.id}">Aktywuj</a></c:if>
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>

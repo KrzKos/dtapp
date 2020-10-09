@@ -10,6 +10,14 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/fragments/menu.jsp"/>
+
+<section class="section">
+    <div class="container">
+        <div class="notification">
+            This container is <strong>centered</strong> on desktop and larger viewports.
+        </div>
+    </div>
+</section>
 <div class="container">
     <form:form modelAttribute="newCase" method="post">
     <div class="columns">
