@@ -10,18 +10,40 @@
 </head>
 <body>
 <c:import url="/WEB-INF/views/fragments/menu.jsp"/>
+
+
+
 <div class="section">
-    <div class="columns">
-        <div class="column is-half">
+    <nav class="level">
+        <!-- Left side -->
+        <div class="level-left">
+
+            <div class="level-item">
+                <form method="get" action="/u/cases/search">
+                    <div class="field has-addons">
+                        <p class="control">
+                            <input class="input" name="name" type="text" placeholder="Szukaj pacjenta">
+                        </p>
+                        <p class="control">
+                            <button class="button" type="submit">
+                                Szukaj
+                            </button>
+                        </p>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="column" align="right">
-            <a href="/u/cases/add" class="button is-round is-primary"><span class="icon is-large">
-          <i class="fas fa-plus-circle" title="W trakcie"></i>
+
+        <!-- Right side -->
+        <div class="level-right">
+            <p class="level-item"><a href="/u/cases/add" class="button is-round is-primary"><span class="icon is-large">
+          <i class="fas fa-plus-circle" title="Dodaj"></i>
         </span>
                 <span><spring:message code="button.add"/></span>
-            </a>
+            </a></p>
         </div>
-    </div>
+    </nav>
+
     <div class="block">
         <table class="table is-striped is-narrow is-hoverable is-fullwidth is-bordered">
             <thead>
@@ -54,6 +76,12 @@
             </c:forEach>
             </tbody>
         </table>
+        <c:if test="${emptyResult == 0}">
+            <div class="constainer">
+                <strong>Nie znaleziono pacjenta o podanej nazwie</strong>
+            </div>
+        </c:if>
+
     </div>
 </div>
 </body>

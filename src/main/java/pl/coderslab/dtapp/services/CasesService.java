@@ -16,7 +16,7 @@ public interface CasesService {
     List<CasesDTO> findCasesByTechnicianOrderByCreatedOnDesc(User technician);
 
     List<CasesDTO> findCasesByLaboratory();
-    List<CasesDTO> findCasesByPatientNameAndLaboratory(String name, Laboratory laboratory);
+    List<CasesDTO> findCasesByPatientNameAndLaboratory(String name);
 
     CasesEditFormDTO findCaseById(Long id) throws NotFoundException;
 
