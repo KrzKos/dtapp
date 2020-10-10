@@ -39,6 +39,7 @@
         <sec:csrfInput/>
 
     </form:form>
+        Nie masz konta? <a href="/register"> Zarejestruj </a>
     </div>
     <div class="column">
 

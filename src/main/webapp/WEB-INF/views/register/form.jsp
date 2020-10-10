@@ -29,7 +29,7 @@
                             <div class="field">
                                 <label class="label">Imię</label>
                                 <div class="control has-icons-left has-icons-right">
-                                    <form:input path="firstName" class="input is-success" type="text" placeholder="Text input" value="bulma"/>
+                                    <form:input path="firstName" class="input is-success" type="text" />
                                     <span class="icon is-small is-left">
                                      <i class="fas fa-user"></i>
                                      </span>
@@ -37,14 +37,15 @@
                                     <i class="fa fa-check"></i>
                                     </span>
                                 </div>
-                                <p class="help">This username is available</p>
+                                <form:errors path="firstName"/>
+
                             </div>
                         </div>
                         <div class="column">
                             <div class="field">
                                 <label class="label">Nazwisko</label>
                                 <div class="control has-icons-left has-icons-right">
-                                    <form:input path="lastName" class="input is-success" type="text" placeholder="Text inpu"/>
+                                    <form:input path="lastName" class="input is-success" type="text" />
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-user"></i>
                                     </span>
@@ -52,7 +53,8 @@
                                         <i class="fa fa-check"></i>
                                     </span>
                                 </div>
-                                <p class="help is-success">This username is available</p>
+                                <form:errors path="lastName"/>
+
                             </div>
                         </div>
                     </div>
@@ -60,7 +62,7 @@
                 <div class="field">
                     <label class="label">Email</label>
                     <div class="control has-icons-left has-icons-right">
-                        <form:input path="email" class="input is-danger" type="email" placeholder="Email input" value="hello@"/>
+                        <form:input path="email" class="input is-danger" type="email" />
                         <span class="icon is-small is-left">
                             <i class="fas fa-envelope"></i>
                         </span>
@@ -68,7 +70,7 @@
                             <i class="fas fa-exclamation-triangle"></i>
                         </span>
                     </div>
-                    <p class="help is-danger">This email is invalid</p>
+                    <form:errors path="email"/>
                 </div>
                 <div class="field">
                     <label class="label">Hasło</label>
@@ -81,12 +83,12 @@
                             <i class="fa fa-check"></i>
                         </span>
                     </div>
-                    <p class="help is-success">This username is available</p>
+                    <form:errors path="password"/>
                 </div>
                 <div class="field">
                     <label class="label">Nazwa laboratorium</label>
                     <div class="control">
-                        <form:input path="labName" class="input" type="text" placeholder="Text input"/>
+                        <form:input path="labName" class="input" type="text" />
                     </div>
                 </div>
                 <div class="field">
@@ -94,6 +96,7 @@
                     <div class="control">
                         <form:input path="labTaxNumber" class="input"/>
                     </div>
+                    <form:errors path="labTaxNumber"/>
                 </div>
                 <div class="field">
                     <label class="label">Adres</label>
@@ -123,14 +126,6 @@
                                 </p>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="control">
-                        <label class="checkbox">
-                            <input type="checkbox">
-                            I agree to the <a href="#">terms and conditions</a>
-                        </label>
                     </div>
                 </div>
 

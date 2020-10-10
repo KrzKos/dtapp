@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -67,6 +68,35 @@
     </div>
 
 </div>
+<section class="section">
+    <div class="columns">
+        <div class="column is-one-third">
+            <c:forEach items="${comments}" var="comment">
+                <article class="message is-small">
+                    <div class="message-header">
+                        <p>${comment.user.lastName}</p>
+                            ${comment.createdOn}
+                    </div>
+                    <div class="message-body">
+                            ${comment.text}
+                    </div>
+                </article>
+            </c:forEach>
+        </div>
+        <div class="column">
+            <div class="control">
+                <form:form method="post" modelAttribute="comment">
+                    <form:textarea cssClass="textarea" cols="10" rows="5" path="text"/>
+                    <p>
+                        <button class="button" type="submit">Skomentuj</button>
+                    </p>
+                </form:form>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section class="section">
 <nav class="level m5">
     <!-- Left side -->
     <div class="level-left">
@@ -78,7 +108,7 @@
         <p><a href="/u/cases/delete/${caseById.id}" class="button is-danger is-small">Usuń</a> </p>
     </div>
 </nav>
-
+</section>
 
 
 </body>

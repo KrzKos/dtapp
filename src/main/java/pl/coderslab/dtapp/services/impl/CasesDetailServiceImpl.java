@@ -6,12 +6,17 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import pl.coderslab.dtapp.auth.AuthenticationFacade;
 import pl.coderslab.dtapp.domain.entities.Cases;
+import pl.coderslab.dtapp.domain.entities.Comment;
 import pl.coderslab.dtapp.domain.entities.User;
 import pl.coderslab.dtapp.domain.repositories.CaseRepository;
+import pl.coderslab.dtapp.domain.repositories.CommentRepository;
 import pl.coderslab.dtapp.domain.repositories.LaboratoryRepository;
 import pl.coderslab.dtapp.domain.repositories.UserRepository;
+import pl.coderslab.dtapp.dto.cases.CasesDTO;
 import pl.coderslab.dtapp.dto.cases.CasesDetailDTO;
+import pl.coderslab.dtapp.dto.comment.CommentDTO;
 import pl.coderslab.dtapp.services.CasesDetailsService;
+import pl.coderslab.dtapp.services.CommentService;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
@@ -25,6 +30,7 @@ public class CasesDetailServiceImpl implements CasesDetailsService {
     private final AuthenticationFacade authentication;
     private final UserServiceImpl userService;
     private final LaboratoryRepository laboratoryRepository;
+    private final CommentRepository commentRepository;
 
     @Override
     public CasesDetailDTO getCaseById(Long id) {
@@ -45,6 +51,22 @@ public class CasesDetailServiceImpl implements CasesDetailsService {
         }
 
         return null;
+    }
+
+    @Override
+    public void addComment(CommentDTO commentDTO, CasesDetailDTO casesDetailDTO) {
+        Comment comment = modelMapper.map(commentDTO,Comment.class);
+        comment.setUser(userService.findByUserEmail(authentication.getAuthentication().getName()));
+        comment.setId(null);
+        commentRepository.save(comment);
+        Optional<Cases> cases = caseRepository.findById(casesDetailDTO.getId());
+        if (!cases.isPresent()){
+            throw new IllegalStateException("Zlecenie nie istnieje");
+        }
+        Cases caseToComment = cases.get();
+        caseToComment.getComments().add(comment);
+
+        caseRepository.save(caseToComment);
     }
 
     private CasesDetailDTO getCasesDetailDTO(Cases caseResult) {

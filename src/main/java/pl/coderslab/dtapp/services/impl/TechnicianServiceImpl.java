@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.coderslab.dtapp.domain.entities.Laboratory;
 import pl.coderslab.dtapp.domain.entities.User;
+import pl.coderslab.dtapp.domain.entities.embedable.Address;
 import pl.coderslab.dtapp.domain.repositories.LaboratoryRepository;
 import pl.coderslab.dtapp.domain.repositories.UserRepository;
 import pl.coderslab.dtapp.dto.laboratory.LaboratoryDTO;
@@ -37,6 +38,10 @@ public class TechnicianServiceImpl implements TechnicianService {
         laboratory.setName(registrationTechnician.getLabName());
         laboratory.setTaxNumber(registrationTechnician.getLabTaxNumber());
         laboratory.getTechnician().add(user);
+        Address address = new Address();
+        address.setStreet(registrationTechnician.getLabStreet());
+        address.setStreetNumber(registrationTechnician.getLabStreetNumber());
+        laboratory.setAddress(address);
         laboratoryRepository.save(laboratory);
 
     }

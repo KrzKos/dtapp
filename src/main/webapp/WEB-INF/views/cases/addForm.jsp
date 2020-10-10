@@ -14,7 +14,7 @@
 <section class="section">
     <div class="container">
         <div class="notification">
-            This container is <strong>centered</strong> on desktop and larger viewports.
+            Dodaj <strong>nowe zlecenie</strong>, dzięki któremu zarobisz milion monet.
         </div>
     </div>
 </section>

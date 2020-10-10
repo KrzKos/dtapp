@@ -27,7 +27,7 @@ public class Cases extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Tooth> teeth;
     private String note;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "dentist_id")
