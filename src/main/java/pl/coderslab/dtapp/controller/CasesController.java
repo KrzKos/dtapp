@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.coderslab.dtapp.dto.cases.CasesDTO;
 import pl.coderslab.dtapp.services.CasesService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -17,7 +18,14 @@ public class CasesController {
 
     @GetMapping
     public String getAllCases(Model model){
-        model.addAttribute("cases", casesService.findCasesByLaboratory());
+        CasesDTO casesDTO = new CasesDTO();
+        casesDTO.setPatientName("Ala");
+        casesDTO.setId(2L);
+
+        List<CasesDTO> casesDTOS = new ArrayList<>();
+        casesDTOS.add(casesDTO);
+        model.addAttribute("cases", casesDTOS);
+       // model.addAttribute("cases", casesService.findCasesByLaboratory());
         return "user/cases";
     }
     @RequestMapping("/search")
