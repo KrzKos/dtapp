@@ -17,7 +17,6 @@ public class CasesDTO {
     private User technician;
 
     public String getTechnicianFullName() {
-        return "testowe imie";
-//        return technician.getFirstName() + " " + technician.getLastName();
+        return technician.getFirstName() + " " + technician.getLastName();
     }
 }
