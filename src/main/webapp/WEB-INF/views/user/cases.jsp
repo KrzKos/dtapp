@@ -58,17 +58,17 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${cases}" var="case" varStatus="lp">
+            <c:forEach items="${cases}" var="tcase" varStatus="lp">
                 <tr>
                     <td>${lp.index + 1}</td>
-                    <td>${case.patientName}</td>
-                    <td>${case.orderTime}</td>
-                    <td>${case.deadline}</td>
-                    <td>${case.technicianFullName}</td>
+                    <td>${tcase.patientName}</td>
+                    <td>${tcase.orderTime}</td>
+                    <td>${tcase.deadline}</td>
+                    <td>${tcase.technicianFullName}</td>
 
                     <td>
 
-                        <a href="/u/cases/detail/${case.id}" class="button is-small is-light">
+                        <a href="/u/cases/detail/${tcase.id}" class="button is-small is-light">
                             szczegóły
                         </a>
                     </td>
