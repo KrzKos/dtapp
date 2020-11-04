@@ -53,7 +53,7 @@ public class CasesServicesImpl implements CasesService {
     @Override
     public List<CasesDTO> findCasesByLaboratory() {
         //Laboratory laboratory = modelMapper.map(laboratoryDTO,Laboratory.class);
-        if (authentication.getAuthentication().getAuthorities().contains(new SimpleGrantedAuthority("SUPER_TECH"))){
+        /*if (authentication.getAuthentication().getAuthorities().contains(new SimpleGrantedAuthority("SUPER_TECH"))) {
             Laboratory laboratory = laboratoryRepository.findLaboratoryByTechnician(getUser());
             List<Cases> cases = caseRepository.findCasesByLaboratory(laboratory);
             List<CasesDTO> casesDTOS = cases.stream()
@@ -63,7 +63,14 @@ public class CasesServicesImpl implements CasesService {
         }
         List<Cases> cases = caseRepository.findCasesByTechnicianOrderByCreatedOnDesc(getUser());
         List<CasesDTO> casesDTOS = cases.stream().map(c -> modelMapper.map(c, CasesDTO.class))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());*/
+        CasesDTO casesDTO = new CasesDTO();
+        casesDTO.setPatientName("Ala");
+        casesDTO.setId(2L);
+
+        List<CasesDTO> casesDTOS = new ArrayList<>();
+        casesDTOS.add(casesDTO);
+
         return casesDTOS;
 
     }
