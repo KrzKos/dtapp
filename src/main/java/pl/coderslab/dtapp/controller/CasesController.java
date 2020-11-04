@@ -18,14 +18,7 @@ public class CasesController {
 
     @GetMapping
     public String getAllCases(Model model){
-        CasesDTO casesDTO = new CasesDTO();
-        casesDTO.setPatientName("Ala");
-        casesDTO.setId(2L);
-
-        List<CasesDTO> casesDTOS = new ArrayList<>();
-        casesDTOS.add(casesDTO);
-        model.addAttribute("cases", casesDTOS);
-       // model.addAttribute("cases", casesService.findCasesByLaboratory());
+        model.addAttribute("cases", casesService.findCasesByLaboratory());
         return "user/cases";
     }
     @RequestMapping("/search")
