@@ -22,6 +22,7 @@ public class CasesDetailController {
     private final CasesDetailsService casesDetailsService;
     private final CommentService commentService;
 
+
     @GetMapping("/{id}")
     public String showCasesDetail(@PathVariable Long id, Model model) {
         CasesDetailDTO casesDetailDTO = casesDetailsService.getCaseById(id);

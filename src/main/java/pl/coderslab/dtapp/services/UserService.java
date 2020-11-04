@@ -13,4 +13,5 @@ public interface UserService {
     List<DentistNameDTO> getAllDentists();
     List<TechnicianNameDTO> getAllTechnician();
     RegularTechDTO findById(long id);
+    List<TechnicianNameDTO> getAllFromLabId();
 }

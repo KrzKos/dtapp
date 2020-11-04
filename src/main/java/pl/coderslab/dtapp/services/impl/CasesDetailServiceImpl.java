@@ -58,15 +58,8 @@ public class CasesDetailServiceImpl implements CasesDetailsService {
         Comment comment = modelMapper.map(commentDTO,Comment.class);
         comment.setUser(userService.findByUserEmail(authentication.getAuthentication().getName()));
         comment.setId(null);
+        comment.setCases(modelMapper.map(casesDetailDTO,Cases.class));
         commentRepository.save(comment);
-        Optional<Cases> cases = caseRepository.findById(casesDetailDTO.getId());
-        if (!cases.isPresent()){
-            throw new IllegalStateException("Zlecenie nie istnieje");
-        }
-        Cases caseToComment = cases.get();
-        caseToComment.getComments().add(comment);
-
-        caseRepository.save(caseToComment);
     }
 
     private CasesDetailDTO getCasesDetailDTO(Cases caseResult) {

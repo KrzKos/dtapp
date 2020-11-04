@@ -24,7 +24,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<CommentDTO> getComments(CasesDetailDTO casesDetailDTO) {
         Cases cases = modelMapper.map(casesDetailDTO, Cases.class);
-        List<Comment> commentList = commentRepository.findCommentsByCaseId(cases.getId());
+        List<Comment> commentList = commentRepository.findCommentsByCasesOrderByCreatedOnDesc(cases);
         List<CommentDTO> commentDTOS = commentList.stream()
                 .map(comment -> modelMapper.map(comment,CommentDTO.class))
                 .collect(Collectors.toList());

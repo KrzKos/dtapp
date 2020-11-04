@@ -26,8 +26,10 @@ public class Cases extends BaseEntity {
     private LocalDateTime finishTime;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Tooth> teeth;
+    @Lob
+    @Column(length = 600)
     private String note;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany( mappedBy = "cases", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "dentist_id")

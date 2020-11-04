@@ -38,7 +38,7 @@ public class AddCaseController {
 
     @ModelAttribute("technicians")
     public List<TechnicianNameDTO> getAllTechnicians() {
-        return userService.getAllTechnician();
+        return userService.getAllFromLabId();
     }
 
     @GetMapping

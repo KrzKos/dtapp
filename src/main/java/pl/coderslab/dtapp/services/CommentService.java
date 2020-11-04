@@ -1,6 +1,5 @@
 package pl.coderslab.dtapp.services;
 
-import pl.coderslab.dtapp.domain.entities.Cases;
 import pl.coderslab.dtapp.dto.cases.CasesDetailDTO;
 import pl.coderslab.dtapp.dto.comment.CommentDTO;
 
